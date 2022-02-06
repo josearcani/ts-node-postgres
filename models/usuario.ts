@@ -1,8 +1,11 @@
 import { DataTypes } from 'sequelize';
 import db from '../db/connection';
 
-const Usuario = db.define('usuario', {
+const Usuario = db.define('usuarios', {
   nombre: {
+    type: DataTypes.STRING
+  },
+  apellido: {
     type: DataTypes.STRING
   },
   email: {
@@ -11,6 +14,8 @@ const Usuario = db.define('usuario', {
   estado: {
     type: DataTypes.BOOLEAN
   },
+},{
+  freezeTableName: true
 });
 
 
