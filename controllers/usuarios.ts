@@ -20,13 +20,18 @@ export const getUsuarios = async( req: Request , res: Response ) => {
 export const getUsuario = async( req: Request , res: Response ) => {
   const { id } = req.params;
 
-  const usuario = await Usuario.findByPk( id );
-  if( usuario ) {
-    res.json(usuario);
-  } else {
+  const usuario = await Usuario.findOne({
+    where: {
+      id,
+      estado: true,
+    }
+  });
+  if(!usuario) {
     res.status(404).json({
-      msg: `No existe un usuario con el id ${ id }`
+      msg: 'No se ha encontrado a un usuario con es id'
     });
+  } else {
+    res.json(usuario);
   }
 }
 
@@ -43,7 +48,7 @@ export const postUsuario = async( req: Request , res: Response ) => {
 
     if (existeEmail) {
       return res.status(400).json({
-        msg: 'Ya existe un usuario con el email ' + body.email
+        msg: 'Ya existe un usuario con el correo ' + body.email
       });
     }
 

@@ -1,11 +1,26 @@
 import { Router } from 'express';
+import { check } from 'express-validator';
 import { getUsuario, getUsuarios, postUsuario, putUsuario, deleteUsuario } from '../controllers/usuarios';
+import { rolValido } from '../helpers/validador-db';
+import { validarCampos } from '../middlewares/validar-campos';
 
 const router = Router();
 
-router.get('/',       getUsuarios );
-router.get('/:id',    getUsuario );
-router.post('/',      postUsuario );
+router.get('/', getUsuarios );
+
+router.get('/:id', [
+  check('id', 'Debe contener un id').notEmpty(),
+  check('id', 'No es un id válido').isNumeric(),
+  validarCampos
+], getUsuario );
+
+router.post('/', [
+  check('email', 'Debe ser un correo válido').isEmail(),
+  check('password', 'La contraseña debe tener al menos 6 characteres').isLength({ min: 6 }),
+  check('rol').custom(rolValido),
+  validarCampos
+], postUsuario );
+
 router.put('/:id',    putUsuario );
 router.delete('/:id', deleteUsuario );
 
