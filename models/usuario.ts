@@ -15,7 +15,8 @@ const Usuario = db.define('usuarios', {
     type: DataTypes.STRING
   },
   estado: {
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   },
   rol: {
     type: DataTypes.ENUM('ADMIN_ROL', 'MONITOR_ROL', 'SALES_ROL', 'CLIENT_ROL')

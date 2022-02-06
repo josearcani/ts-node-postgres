@@ -1,48 +1,71 @@
 import { Request, Response } from 'express';
 import Usuario from '../models/usuario';
+import bcrypt from 'bcryptjs';
 
 export const getUsuarios = async( req: Request , res: Response ) => {
 
-  const usuarios = await Usuario.findAll();
+  const { limit = 10, page = 1 } = req.query;
+
+  const offset = (Number(page) - 1) * 10 + 1;
+
+  const usuarios = await Usuario.findAndCountAll({
+    where: {
+      estado: true
+    },
+    limit: Number(limit),
+    offset
+  });
   res.json({ usuarios });
 }
 
 export const getUsuario = async( req: Request , res: Response ) => {
   const { id } = req.params;
 
-  const usuario = await Usuario.findByPk( id );
-  if( usuario ) {
-    res.json(usuario);
-  } else {
+  const usuario = await Usuario.findOne({
+    where: {
+      id,
+      estado: true,
+    }
+  });
+  if(!usuario) {
     res.status(404).json({
-      msg: `No existe un usuario con el id ${ id }`
+      msg: 'No se ha encontrado a un usuario con es id'
     });
+  } else {
+    res.json(usuario);
   }
 }
 
 export const postUsuario = async( req: Request , res: Response ) => {
 
-  const { body } = req;
+  const { nombre, apellido, email, password, rol } = req.body;
 
   try {
     const existeEmail = await Usuario.findOne({
       where: {
-        email: body.email
+        email
       }
     });
 
     if (existeEmail) {
       return res.status(400).json({
-        msg: 'Ya existe un usuario con el email ' + body.email
+        msg: 'Ya existe un usuario con el correo ' + email
       });
     }
 
-    body.estado = true;
+    const usuario:any = await Usuario.create({ nombre, apellido, email, password, rol });
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    usuario.password = hash;
     // const usuario = new Usuario(body);
-    const usuario = await Usuario.create(body);
     await usuario.save();
 
-    res.json( usuario );
+    res.json({
+      msg: 'Éxito',
+      usuario,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -51,24 +74,21 @@ export const postUsuario = async( req: Request , res: Response ) => {
   }
 }
 
-export const putUsuario = async( req: Request , res: Response ) => {
+export const putUsuario = async ( req: Request , res: Response ) => {
   const { id }   = req.params;
-  const { body } = req;
-
+  // only updates nombre and apellido
+  const { email, password, rol, estado, ...data } = req.body;
+  
   try {
-    const usuario = await Usuario.findByPk( id );
-    if ( !usuario ) {
-      return res.status(404).json({
-        msg: 'No existe un usuario con el id ' + id
-      });
-    }
+    const usuario:any = await Usuario.findByPk(id);
+    await usuario.update(data);
 
-    await usuario.update( body );
-
-    res.json( usuario );
+    res.json({
+      msg: 'Actualizado',
+      usuario
+    });
 
   } catch (error) {
-
     console.log(error);
     res.status(500).json({
       msg: 'Hable con el administrador'
@@ -81,17 +101,13 @@ export const deleteUsuario = async( req: Request , res: Response ) => {
 
   const { id } = req.params;
 
-  const usuario = await Usuario.findByPk( id );
-  if ( !usuario ) {
-    return res.status(404).json({
-      msg: 'No existe un usuario con el id ' + id
-    });
-  }
+  const usuario:any = await Usuario.findByPk( id );
 
   await usuario.update({ estado: false });
-  
   // await usuario.destroy();
-  res.json(usuario);
+  res.json({
+    msg: 'borrado'
+  });
 
 }
 

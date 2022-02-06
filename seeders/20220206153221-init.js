@@ -38,7 +38,7 @@ module.exports = {
         apellido: 'Marsh',
         email: 'carol@test.com',
         password: 'secret',
-        estado: true,
+        estado: false,
         rol: 'USER_ROL',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -57,13 +57,19 @@ module.exports = {
 
     await queryInterface.bulkInsert('roles', [
       {
-        rol: 'ADMIN_ROL'
+        rol: 'ADMIN_ROL',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        rol: 'MONITOR_ROL'
+        rol: 'MONITOR_ROL',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        rol: 'USER_ROL'
+        rol: 'USER_ROL',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ], {});
   },
