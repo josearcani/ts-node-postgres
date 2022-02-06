@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Usuario from '../models/usuario';
+import bcrypt from 'bcryptjs';
 
 export const getUsuarios = async( req: Request , res: Response ) => {
 
@@ -37,27 +38,34 @@ export const getUsuario = async( req: Request , res: Response ) => {
 
 export const postUsuario = async( req: Request , res: Response ) => {
 
-  const { body } = req;
+  const { nombre, apellido, email, password, rol } = req.body;
 
   try {
     const existeEmail = await Usuario.findOne({
       where: {
-        email: body.email
+        email
       }
     });
 
     if (existeEmail) {
       return res.status(400).json({
-        msg: 'Ya existe un usuario con el correo ' + body.email
+        msg: 'Ya existe un usuario con el correo ' + email
       });
     }
 
-    body.estado = true;
+    const usuario:any = await Usuario.create({ nombre, apellido, email, password, rol });
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    usuario.password = hash;
     // const usuario = new Usuario(body);
-    const usuario = await Usuario.create(body);
     await usuario.save();
 
-    res.json( usuario );
+    res.json({
+      msg: 'Éxito',
+      usuario,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

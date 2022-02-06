@@ -15,6 +15,8 @@ router.get('/:id', [
 ], getUsuario );
 
 router.post('/', [
+  check('nombre', 'Debe de tener nombre').notEmpty(),
+  check('apellido', 'Debe de tener apellido').notEmpty(),
   check('email', 'Debe ser un correo válido').isEmail(),
   check('password', 'La contraseña debe tener al menos 6 characteres').isLength({ min: 6 }),
   check('rol').custom(rolValido),
