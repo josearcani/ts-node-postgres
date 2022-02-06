@@ -23,7 +23,7 @@ router.post('/', [
   validarCampos
 ], postUsuario );
 
-router.put('/:id',[
+router.put('/:id', [
   check('id', 'Debe contener un id').notEmpty(),
   check('id', 'No es un id válido').isNumeric(),
   check('id').custom(idUsuarioExiste),
@@ -31,7 +31,12 @@ router.put('/:id',[
   validarCampos
 ],putUsuario );
 
-router.delete('/:id', deleteUsuario );
+router.delete('/:id', [
+  check('id', 'Debe contener un id').notEmpty(),
+  check('id', 'No es un id válido').isNumeric(),
+  check('id').custom(idUsuarioExiste),
+  validarCampos
+],deleteUsuario );
 
 
 export default router;
