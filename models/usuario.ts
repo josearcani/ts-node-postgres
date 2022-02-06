@@ -11,6 +11,9 @@ const Usuario = db.define('usuarios', {
   email: {
     type: DataTypes.STRING
   },
+  password: {
+    type: DataTypes.STRING
+  },
   estado: {
     type: DataTypes.BOOLEAN
   },

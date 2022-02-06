@@ -15,7 +15,7 @@ import Usuario from '../models/usuario';
 
 export const login = async (req: Request, res: Response) => {
   
-  const { nombre, email }: { nombre: string; email: string } = req.body;
+  const { email, password }: { email: string, password: string } = req.body;
 
   try {
     const usuario:any  = await Usuario.findOne({
@@ -35,8 +35,13 @@ export const login = async (req: Request, res: Response) => {
         msg: 'El correo o contraseña es válido - estado false'
       })
     }
-  
-    // TODO validar contraseña
+    
+    // TODO validar contraseña use bcrypt 
+    if (password !== usuario.password) {
+      return res.status(400).json({
+        msg: 'El correo o contraseña es válido - constraseña'
+      })
+    }
   
     const token = await generarJWT(usuario.email);
   
