@@ -3,7 +3,17 @@ import Usuario from '../models/usuario';
 
 export const getUsuarios = async( req: Request , res: Response ) => {
 
-  const usuarios = await Usuario.findAll();
+  const { limit = 10, page = 1 } = req.query;
+
+  const offset = (Number(page) - 1) * 10 + 1;
+
+  const usuarios = await Usuario.findAndCountAll({
+    where: {
+      estado: true
+    },
+    limit: Number(limit),
+    offset
+  });
   res.json({ usuarios });
 }
 
