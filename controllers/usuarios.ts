@@ -74,24 +74,21 @@ export const postUsuario = async( req: Request , res: Response ) => {
   }
 }
 
-export const putUsuario = async( req: Request , res: Response ) => {
+export const putUsuario = async ( req: Request , res: Response ) => {
   const { id }   = req.params;
-  const { body } = req;
-
+  // only updates nombre and apellido
+  const { email, password, rol, estado, ...data } = req.body;
+  
   try {
-    const usuario = await Usuario.findByPk( id );
-    if ( !usuario ) {
-      return res.status(404).json({
-        msg: 'No existe un usuario con el id ' + id
-      });
-    }
+    const usuario:any = await Usuario.findByPk(id);
+    await usuario.update(data);
 
-    await usuario.update( body );
-
-    res.json( usuario );
+    res.json({
+      msg: 'Actualizado',
+      usuario
+    });
 
   } catch (error) {
-
     console.log(error);
     res.status(500).json({
       msg: 'Hable con el administrador'

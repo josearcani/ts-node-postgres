@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 import { getUsuario, getUsuarios, postUsuario, putUsuario, deleteUsuario } from '../controllers/usuarios';
-import { rolValido } from '../helpers/validador-db';
+import { idUsuarioExiste, rolValido } from '../helpers/validador-db';
 import { validarCampos } from '../middlewares/validar-campos';
 
 const router = Router();
@@ -23,7 +23,14 @@ router.post('/', [
   validarCampos
 ], postUsuario );
 
-router.put('/:id',    putUsuario );
+router.put('/:id',[
+  check('id', 'Debe contener un id').notEmpty(),
+  check('id', 'No es un id válido').isNumeric(),
+  check('id').custom(idUsuarioExiste),
+  check('rol').custom(rolValido),
+  validarCampos
+],putUsuario );
+
 router.delete('/:id', deleteUsuario );
 
 
