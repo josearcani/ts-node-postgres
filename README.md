@@ -21,7 +21,9 @@ Run app.js from /dist directory
 ```json
 "scrits" {
   "make-model" // creates files to migrate
+  "make-seed" // creates a seed
   "migrate" // migrates tables defined in /migrations directory
+  "seed" // inserts data
   "down" // takes down every table created with migration
 }
 ```
