@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
 import { generarJWT } from '../helpers/generar-jwt';
 import Usuario from '../models/usuario';
 
@@ -37,7 +38,8 @@ export const login = async (req: Request, res: Response) => {
     }
     
     // TODO validar contraseña use bcrypt 
-    if (password !== usuario.password) {
+    const passwordValido = bcrypt.compareSync(password, usuario.password);
+    if (!passwordValido) {
       return res.status(400).json({
         msg: 'El correo o contraseña es válido - constraseña'
       })
