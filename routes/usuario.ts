@@ -3,6 +3,8 @@ import { check } from 'express-validator';
 import { getUsuario, getUsuarios, postUsuario, putUsuario, deleteUsuario } from '../controllers/usuarios';
 import { idUsuarioExiste, rolValido } from '../helpers/validador-db';
 import { validarCampos } from '../middlewares/validar-campos';
+import { validarJWT } from '../middlewares/validar-jwt';
+import { validarRol } from '../middlewares/validar-rol';
 
 const router = Router();
 
@@ -32,6 +34,8 @@ router.put('/:id', [
 ],putUsuario );
 
 router.delete('/:id', [
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MONITOR_ROL'),
   check('id', 'Debe contener un id').notEmpty(),
   check('id', 'No es un id válido').isNumeric(),
   check('id').custom(idUsuarioExiste),
