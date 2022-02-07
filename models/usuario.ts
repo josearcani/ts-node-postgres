@@ -19,10 +19,16 @@ const Usuario = db.define('usuarios', {
     defaultValue: true
   },
   rol: {
-    type: DataTypes.ENUM('ADMIN_ROL', 'MONITOR_ROL', 'SALES_ROL', 'CLIENT_ROL')
+    type: DataTypes.ENUM('ADMIN_ROL', 'MONITOR_ROL', 'SALES_ROL', 'CLIENT_ROL'),
+    defaultValue: 'USER_ROL'
   }
 },{
-  freezeTableName: true
+  freezeTableName: true,
+  scopes: {
+    withoutPassword: {
+      attributes: { exclude: ['password'] }
+    }
+  }
 });
 
 

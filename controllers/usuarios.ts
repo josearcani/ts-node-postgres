@@ -8,7 +8,7 @@ export const getUsuarios = async( req: Request , res: Response ) => {
 
   const offset = (Number(page) - 1) * 10 + 1;
 
-  const usuarios = await Usuario.findAndCountAll({
+  const usuarios = await Usuario.scope('withoutPassword').findAndCountAll({
     where: {
       estado: true
     },
@@ -21,7 +21,7 @@ export const getUsuarios = async( req: Request , res: Response ) => {
 export const getUsuario = async( req: Request , res: Response ) => {
   const { id } = req.params;
 
-  const usuario = await Usuario.findOne({
+  const usuario = await Usuario.scope('withoutPassword').findOne({
     where: {
       id,
       estado: true,
@@ -41,7 +41,7 @@ export const postUsuario = async( req: Request , res: Response ) => {
   const { nombre, apellido, email, password, rol } = req.body;
 
   try {
-    const existeEmail = await Usuario.findOne({
+    const existeEmail = await Usuario.scope('withoutPassword').findOne({
       where: {
         email
       }
@@ -63,7 +63,7 @@ export const postUsuario = async( req: Request , res: Response ) => {
     await usuario.save();
 
     res.json({
-      msg: 'Éxito',
+      msg: 'Usuario creado',
       usuario,
     });
   } catch (error) {
@@ -80,7 +80,7 @@ export const putUsuario = async ( req: Request , res: Response ) => {
   const { email, password, rol, estado, ...data } = req.body;
   
   try {
-    const usuario:any = await Usuario.findByPk(id);
+    const usuario:any = await Usuario.scope('withoutPassword').findByPk(id);
     await usuario.update(data);
 
     res.json({
@@ -101,7 +101,7 @@ export const deleteUsuario = async( req: Request , res: Response ) => {
 
   const { id } = req.params;
 
-  const usuario:any = await Usuario.findByPk( id );
+  const usuario:any = await Usuario.scope('withoutPassword').findByPk( id );
 
   await usuario.update({ estado: false });
   // await usuario.destroy();
