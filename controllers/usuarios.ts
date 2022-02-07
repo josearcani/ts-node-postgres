@@ -6,14 +6,14 @@ export const getUsuarios = async( req: Request , res: Response ) => {
 
   const { limit = 10, page = 1 } = req.query;
 
-  const offset = (Number(page) - 1) * 10 + 1;
+  const offset = (Number(page) - 1) * Number(limit) + 1;
 
   const usuarios = await Usuario.scope('withoutPassword').findAndCountAll({
     where: {
       estado: true
     },
     limit: Number(limit),
-    offset
+    offset: (offset === 1) ? 0 : offset - 1
   });
   res.json({ usuarios });
 }
