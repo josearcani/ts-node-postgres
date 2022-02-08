@@ -1,18 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { generarJWT } from '../helpers/generar-jwt';
-import Usuario from '../models/usuario';
-
-// interface UsuarioDB {
-//   id: string;
-//   nombre: string,
-//   apellido: string;
-//   email: string;
-//   estado: boolean;
-//   rol: string;
-//   createdAt: Date;
-//   updatedAt: Date;
-// }
+import { Usuario } from '../models';
+import { generarJWT } from '../helpers';
 
 export const login = async (req: Request, res: Response) => {
   

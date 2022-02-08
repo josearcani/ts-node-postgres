@@ -132,6 +132,99 @@ module.exports = {
         updatedAt: new Date(),
       }
     ], {});
+
+    await queryInterface.bulkInsert('cursos', [
+      {
+        nombreCurso: 'Yoga para abuelitos',
+        fechaIni: new Date(),
+        fechaFin: new Date(),
+        fechaFinDeMatricula: new Date(),
+        maxMatriculados: 30,
+        minMatriculados: 10,
+        cursoIniciado: false,
+        cursoActivo: true,
+        horasTotales: 5,
+        monitor: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nombreCurso: 'Pilates',
+        fechaIni: new Date(),
+        fechaFin: new Date(),
+        fechaFinDeMatricula: new Date(),
+        maxMatriculados: 10,
+        minMatriculados: 5,
+        cursoIniciado: true,
+        cursoActivo: true,
+        horasTotales: 2,
+        monitor: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nombreCurso: 'Salai Fitness',
+        fechaIni: new Date(),
+        fechaFin: new Date(),
+        fechaFinDeMatricula: new Date(),
+        maxMatriculados: 50,
+        minMatriculados: 30,
+        cursoIniciado: false,
+        cursoActivo: true,
+        horasTotales: 8,
+        monitor: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {});
+
+    await queryInterface.bulkInsert('actividades', [
+      {
+        nombreActividad: 'Actividad 1',
+        descripcion: new Date(),
+        cursoId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nombreActividad: 'Actividad 2',
+        descripcion: new Date(),
+        cursoId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nombreActividad: 'Actividad 3',
+        descripcion: new Date(),
+        cursoId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {});
+
+    await queryInterface.bulkInsert('clases', [
+      {
+        inicio: new Date(),
+        finClase: new Date(),
+        cursoId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        inicio: new Date(),
+        finClase: new Date(),
+        cursoId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        inicio: new Date(),
+        finClase: new Date(),
+        cursoId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {});
   },
 
   async down (queryInterface, Sequelize) {

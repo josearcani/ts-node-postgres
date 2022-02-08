@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Usuario from '../models/usuario';
 import bcrypt from 'bcryptjs';
+import { Usuario } from '../models';
 
 export const getUsuarios = async( req: Request , res: Response ) => {
 
@@ -98,7 +98,6 @@ export const putUsuario = async ( req: Request , res: Response ) => {
 
 
 export const deleteUsuario = async( req: Request , res: Response ) => {
-
   const { id } = req.params;
 
   const usuario:any = await Usuario.scope('withoutPassword').findByPk( id );
@@ -108,6 +107,4 @@ export const deleteUsuario = async( req: Request , res: Response ) => {
   res.json({
     msg: 'borrado'
   });
-
 }
-

@@ -92,38 +92,119 @@ module.exports = {
     //   }
     // });
 
-    // await queryInterface.createTable('clientes', {
-    //   id: {
-    //     allowNull: false,
-    //     autoIncrement: true,
-    //     primaryKey: true,
-    //     type: Sequelize.INTEGER
-    //   },
-    //   nombre: {
-    //     type: Sequelize.STRING
-    //   },
-    //   apellido: {
-    //     type: Sequelize.STRING
-    //   },
-    //   email: {
-    //     type: Sequelize.STRING,
-    //     allowNull: false,
-    //     unique: true
-    //   },
-    //   estado: {
-    //     type: Sequelize.BOOLEAN,
-    //     allowNull: false
-    //   },
-    //   createdAt: {
-    //     allowNull: false,
-    //     type: Sequelize.DATE
-    //   },
-    //   updatedAt: {
-    //     allowNull: false,
-    //     type: Sequelize.DATE
-    //   }
-    // });
+    await queryInterface.createTable('cursos', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      nombreCurso: {
+        type: Sequelize.STRING
+      },
+      fechaIni: {
+        type: Sequelize.DATE
+      },
+      fechaFin: {
+        type: Sequelize.DATE
+      },
+      fechaFinDeMatricula: {
+        type: Sequelize.DATE
+      },
+      maxMatriculados: {
+        type: Sequelize.INTEGER
+      },
+      minMatriculados: {
+        type: Sequelize.INTEGER
+      },
+      cursoIniciado: {
+        type: Sequelize.BOOLEAN
+      },
+      cursoActivo: {
+        type: Sequelize.BOOLEAN
+      },
+      horasTotales: {
+        type: Sequelize.INTEGER
+      },
+      monitor: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'usuarios',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
 
+    await queryInterface.createTable('actividades', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      nombreActividad: {
+        type: Sequelize.STRING
+      },
+      descripcion: {
+        type: Sequelize.STRING
+      },
+      cursoId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'cursos',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+
+    await queryInterface.createTable('clases', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      inicio: {
+        type: Sequelize.DATE
+      },
+      finClase: {
+        type: Sequelize.DATE
+      },
+      cursoId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'cursos',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropAllTables();
