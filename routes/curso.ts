@@ -43,6 +43,14 @@ router.put('/:id',[
   check('id').custom(idCursoExiste),
   validarCampos
 ], putCurso);
-router.delete('/:id', deleteCurso);
+
+router.delete('/:id',[
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MONITOR_ROL'),
+  check('id', 'Debe contener un id').notEmpty(),
+  check('id', 'No es un id válido').isNumeric(),
+  check('id').custom(idCursoExiste),
+  validarCampos
+], deleteCurso);
 
 export default router;

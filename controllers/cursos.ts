@@ -148,8 +148,11 @@ export const putCurso = async (req:Request, res:Response) => {
 
 export const deleteCurso = async (req:Request, res:Response) => {
   const { id } = req.params;
+
+  const curso:any = await Curso.findByPk(id);
+  await curso.update({ cursoActivo: false })
+
   res.json({
-    msg: 'borrar curso',
-    id
+    msg: 'Curso desactivado',
   })
 }
