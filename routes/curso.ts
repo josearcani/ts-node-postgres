@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import { isDate } from '../helpers/isDate';
 import { getCursos, getCurso, postCurso, putCurso, deleteCurso } from '../controllers/cursos';
 import { validarRol, validarJWT, validarCampos } from '../middlewares';
+import { idCursoExiste } from '../helpers/validador-db';
 const router = Router();
 
 router.get('/',[
@@ -34,7 +35,14 @@ router.post('/',[
   validarCampos
 ], postCurso);
 
-router.put('/:id', putCurso);
+router.put('/:id',[
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MONITOR_ROL'),
+  check('id', 'Debe contener un id').notEmpty(),
+  check('id', 'No es un id válido').isNumeric(),
+  check('id').custom(idCursoExiste),
+  validarCampos
+], putCurso);
 router.delete('/:id', deleteCurso);
 
 export default router;

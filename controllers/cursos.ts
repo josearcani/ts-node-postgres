@@ -110,17 +110,42 @@ export const postCurso = async (req:Request, res:Response) => {
       msg: 'Hable con el administrador'
     })
   }
-
 }
+
+
 export const putCurso = async (req:Request, res:Response) => {
   const { id } = req.params;
-  const { body } = req;
+  const {
+    fechaIni,
+    fechaFin,
+    fechaFinDeMatricula,
+    maxMatriculados,
+    minMatriculados,
+    cursoIniciado,
+    cursoActivo,
+    horasTotales,
+    ...data
+  } = req.body;
+
+  
+  const curso:any = await Curso.findByPk(id);
+  await curso.update({
+    fechaFin,
+    fechaIni,
+    fechaFinDeMatricula,
+    maxMatriculados,
+    minMatriculados,
+    cursoIniciado,
+    cursoActivo,
+    horasTotales,
+  })
+
   res.json({
     msg: 'actualizar curso',
-    id,
-    body,
+    curso
   })
 }
+
 export const deleteCurso = async (req:Request, res:Response) => {
   const { id } = req.params;
   res.json({
