@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { isDate } from '../helpers/isDate';
 import { getCursos, getCurso, postCurso, putCurso, deleteCurso } from '../controllers/cursos';
 import { validarRol, validarJWT, validarCampos } from '../middlewares';
-import { idCursoExiste } from '../helpers/validador-db';
+import { idCursoExiste, isDate } from '../helpers';
 const router = Router();
 
 router.get('/',[
