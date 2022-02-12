@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('usuarios', {
+    await queryInterface.createTable('empleados', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUID,
@@ -40,27 +40,65 @@ module.exports = {
       }
     });
 
-    // await queryInterface.createTable('roles', {
-    //   id: {
-    //     allowNull: false,
-    //     autoIncrement: true,
-    //     primaryKey: true,
-    //     type: Sequelize.INTEGER
-    //   },
-    //   rol: {
-    //     type: Sequelize.STRING,
-    //     allowNull: false,
-    //     unique: true
-    //   },
-    //   createdAt: {
-    //     allowNull: false,
-    //     type: Sequelize.DATE
-    //   },
-    //   updatedAt: {
-    //     allowNull: false,
-    //     type: Sequelize.DATE
-    //   }
-    // });
+    await queryInterface.createTable('clientes', {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUID,
+        primaryKey: true,
+      },
+      nombre: {
+        type: Sequelize.STRING
+      },
+      apellido: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      estado: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
+      rol: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+
+    await queryInterface.createTable('roles', {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUID,
+        primaryKey: true,
+      },
+      rol: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
 
 
     // await queryInterface.createTable('gimnasios', {

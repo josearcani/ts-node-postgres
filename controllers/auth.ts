@@ -1,18 +1,21 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { Usuario } from '../models';
+import { Cliente, Empleado } from '../models';
 import { generarJWT } from '../helpers';
 
 export const login = async (req: Request, res: Response) => {
   
   const { email, password }: { email: string, password: string } = req.body;
-
+  const { isEmployee } = req;
   try {
-    const usuario:any  = await Usuario.findOne({
-      where: {
-        email
-      }
-    });
+
+    let usuario:any;
+    console.log('the user is employee', isEmployee)
+    if (isEmployee) {
+      usuario  = await Empleado.findOne({ where: { email } });
+    } else {
+      usuario  = await Cliente.findOne({ where: { email } });
+    }
   
     if (!usuario) {
       return res.status(400).json({
@@ -36,10 +39,12 @@ export const login = async (req: Request, res: Response) => {
   
     const token = await generarJWT(usuario.email);
   
+    const { password: notSEND , ...data } = usuario.dataValues; 
+
     res.json({
-      msg: 'login con post',
+      msg: 'login',
       token,
-      usuario
+      usuario: data
     });
   } catch (error) {
     console.log(error);

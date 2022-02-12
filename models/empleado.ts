@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../db/connection';
 
-const Usuario = db.define('usuarios', {
+const Empleado = db.define('empleados', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -29,12 +29,12 @@ const Usuario = db.define('usuarios', {
     allowNull: false,
   },
   rol: {
-    type: DataTypes.ENUM('ADMIN_ROL', 'MONITOR_ROL', 'SALES_ROL', 'CLIENT_ROL'),
-    defaultValue: 'USER_ROL'
+    type: DataTypes.ENUM('ADMIN_ROL', 'MANAGER_ROL', 'TRAINER_ROL', 'VENTA_ROL'),
+    // defaultValue: 'VENTA_ROL'
   }
 },{
   // freezeTableName: true,
-  tableName: 'Employees',
+  // tableName: 'Employees',
   scopes: {
     withoutPassword: {
       attributes: { exclude: ['password'] }
@@ -42,6 +42,6 @@ const Usuario = db.define('usuarios', {
   }
 });
 
-db.sync({ alter: true });
+// db.sync({ alter: true });
 
-export default Usuario;
+export default Empleado;
