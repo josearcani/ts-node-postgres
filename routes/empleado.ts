@@ -1,43 +1,51 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { getUsuario, getUsuarios, postUsuario, putUsuario, deleteUsuario } from '../controllers/usuarios';
+import { getEmpleado, getEmpleados, postEmpleado, putEmpleado, deleteEmpleado } from '../controllers/empleados';
 import { validarRol, validarJWT, validarCampos } from '../middlewares';
 import { idUsuarioExiste, rolValido } from '../helpers';
 
 const router = Router();
 
-router.get('/', getUsuarios );
+router.get('/',[
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MANAGER_ROL'),
+  validarCampos
+], getEmpleados );
 
 router.get('/:id', [
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MANAGER_ROL'),
   check('id', 'Debe contener un id').notEmpty(),
-  check('id', 'No es un id válido').isNumeric(),
+  check('id', 'No es un id válido').isUUID(),
   validarCampos
-], getUsuario );
+], getEmpleado );
 
 router.post('/', [
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MANAGER_ROL'),
   check('nombre', 'Debe de tener nombre').notEmpty(),
   check('apellido', 'Debe de tener apellido').notEmpty(),
   check('email', 'Debe ser un correo válido').isEmail(),
   check('password', 'La contraseña debe tener al menos 6 characteres').isLength({ min: 6 }),
   check('rol').custom(rolValido),
   validarCampos
-], postUsuario );
+], postEmpleado );
 
 router.put('/:id', [
   check('id', 'Debe contener un id').notEmpty(),
-  check('id', 'No es un id válido').isNumeric(),
+  check('id', 'No es un id válido').isUUID(),
   check('id').custom(idUsuarioExiste),
   check('rol').custom(rolValido),
   validarCampos
-],putUsuario );
+],putEmpleado );
 
 router.delete('/:id', [
   validarJWT,
-  validarRol('ADMIN_ROL', 'MONITOR_ROL'),
+  validarRol('ADMIN_ROL', 'MANAGER_ROL'),
   check('id', 'Debe contener un id').notEmpty(),
-  check('id', 'No es un id válido').isNumeric(),
+  check('id', 'No es un id válido').isUUID(),
   check('id').custom(idUsuarioExiste),
   validarCampos
-],deleteUsuario );
+],deleteEmpleado );
 
 export default router;

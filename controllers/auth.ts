@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { Usuario } from '../models';
+import { Empleado } from '../models';
 import { generarJWT } from '../helpers';
 
 export const login = async (req: Request, res: Response) => {
@@ -8,7 +8,7 @@ export const login = async (req: Request, res: Response) => {
   const { email, password }: { email: string, password: string } = req.body;
 
   try {
-    const usuario:any  = await Usuario.findOne({
+    const usuario:any  = await Empleado.findOne({
       where: {
         email
       }

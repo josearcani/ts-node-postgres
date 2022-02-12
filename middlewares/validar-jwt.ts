@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import Usuario from '../models/usuario';
+import Empleado from '../models/empleado';
 
 
 type Next = () => void | Promise<void>
@@ -17,7 +17,7 @@ export const validarJWT = async (req: Request , res: Response, next:Next) => {
     const secret = process.env.SECRET_TOKEN_KEY;
     if (secret) {
       const { email }:any = jwt.verify(token, secret);
-      const usuario:any = await Usuario.scope('withoutPassword').findOne({
+      const usuario:any = await Empleado.scope('withoutPassword').findOne({
         where: {
           email,
           estado: true,
