@@ -1,6 +1,5 @@
-import Rol from "../models/rol"
 // import Curso from "../models/curso";
-import Empleado from "../models/empleado";
+import { Cliente, Empleado, Rol } from "../models";
 
 export const rolValido = async (rol = '') => {
   const rolExiste = await Rol.findOne({
@@ -14,8 +13,12 @@ export const rolValido = async (rol = '') => {
 }
 
 export const idUsuarioExiste = async (id= '') => {
-  const data = await Empleado.findByPk( id );
-  if (!data) {
+  const [empleado, cliente] = await Promise.all([
+    Empleado.findByPk( id ),
+    Cliente.findByPk( id ),
+  ])
+  // const data = await Empleado.findByPk( id );
+  if (!empleado && !cliente) {
     throw new Error(`El id ${id} no existe`);
   }
 }

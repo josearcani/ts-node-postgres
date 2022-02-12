@@ -2,7 +2,8 @@ import dotenv from 'dotenv';
 import Server from './models/server';
 declare module 'express-serve-static-core' {
   interface Request {
-    usuario?: Usuario
+    usuario?: Usuario,
+    isEmployee?: boolean
   }
   interface Response {
     myField?: string
@@ -15,6 +16,7 @@ interface Usuario {
   apellido: string;
   email: string;
   rol: string;
+  estado: boolean,
   password?: string
 }
 // Configurar dot.env

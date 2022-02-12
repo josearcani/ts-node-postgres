@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import empleadoRoutes from '../routes/empleado';
+import clienteRoutes from '../routes/cliente';
 import userAuth from '../routes/auth';
 // import cursoRoutes from '../routes/curso';
 import cors from 'cors';
@@ -47,6 +48,7 @@ class Server {
   routes() {
     this.app.use(this.apiPaths.auth, userAuth);
     this.app.use(this.apiPaths.empleados, empleadoRoutes);
+    this.app.use(this.apiPaths.clientes, clienteRoutes);
     // this.app.use(this.apiPaths.clientes, cursoRoutes);
   }
 
