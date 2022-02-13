@@ -1,5 +1,4 @@
-// import Curso from "../models/curso";
-import { Cliente, Empleado, Rol } from "../models";
+import { Cliente, Empleado, Rol, Curso } from '../models';
 
 export const rolValido = async (rol = '') => {
   const rolExiste = await Rol.findOne({
@@ -23,9 +22,9 @@ export const idUsuarioExiste = async (id= '') => {
   }
 }
 
-// export const idCursoExiste = async (id= '') => {
-//   const data = await Curso.findByPk( id );
-//   if (!data) {
-//     throw new Error(`El id ${id} no existe`);
-//   }
-// }
+export const idCursoExiste = async (id= '') => {
+  const data = await Curso.findByPk( id );
+  if (!data) {
+    throw new Error(`El id ${id} no existe`);
+  }
+}

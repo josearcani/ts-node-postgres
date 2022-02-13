@@ -15,5 +15,4 @@ const Rol = db.define('roles', {
   freezeTableName: true
 });
 
-
 export default Rol;
