@@ -33,15 +33,11 @@ const Cliente = db.define('clientes', {
     defaultValue: 'CLIENTE_ROL'
   }
 },{
-  // freezeTableName: true,
-  // tableName: 'Employees',
   scopes: {
     withoutPassword: {
       attributes: { exclude: ['password'] }
     }
   }
 });
-
-// db.sync({ alter: true });
 
 export default Cliente;

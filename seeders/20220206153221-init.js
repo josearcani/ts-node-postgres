@@ -38,6 +38,17 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'c2565d02-75ee-4821-bfd4-ff763c542785',
+        nombre: 'Steve',
+        apellido: 'Long',
+        email: 'steve@test.com',
+        password: '$2a$10$6BNo0AQmbRrQOHEtNdsIn.mnZSzee/8VNiPTFEBG5ytmTVCm1draS',
+        estado: true,
+        rol: 'TRAINER_ROL',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
 
     ], {});
 
@@ -164,51 +175,54 @@ module.exports = {
         updatedAt: new Date(),
       }
     ], {});
-
-    // await queryInterface.bulkInsert('cursos', [
-    //   {
-    //     nombreCurso: 'Yoga para abuelitos',
-    //     fechaIni: new Date(),
-    //     fechaFin: new Date(),
-    //     fechaFinDeMatricula: new Date(),
-    //     maxMatriculados: 30,
-    //     minMatriculados: 10,
-    //     cursoIniciado: false,
-    //     cursoActivo: true,
-    //     horasTotales: 5,
-    //     monitor: 3,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date(),
-    //   },
-    //   {
-    //     nombreCurso: 'Pilates',
-    //     fechaIni: new Date(),
-    //     fechaFin: new Date(),
-    //     fechaFinDeMatricula: new Date(),
-    //     maxMatriculados: 10,
-    //     minMatriculados: 5,
-    //     cursoIniciado: true,
-    //     cursoActivo: true,
-    //     horasTotales: 2,
-    //     monitor: 3,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date(),
-    //   },
-    //   {
-    //     nombreCurso: 'Salai Fitness',
-    //     fechaIni: new Date(),
-    //     fechaFin: new Date(),
-    //     fechaFinDeMatricula: new Date(),
-    //     maxMatriculados: 50,
-    //     minMatriculados: 30,
-    //     cursoIniciado: false,
-    //     cursoActivo: true,
-    //     horasTotales: 8,
-    //     monitor: 4,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date(),
-    //   },
-    // ], {});
+    
+    await queryInterface.bulkInsert('cursos', [
+      {
+        id: '2d033528-0256-491e-88b0-2d5af5864a40',
+        nombreCurso: 'Yoga para abuelitos',
+        fechaIni: new Date(),
+        fechaFin: new Date(),
+        fechaFinDeMatricula: new Date(),
+        maxMatriculados: 30,
+        minMatriculados: 10,
+        cursoIniciado: false,
+        cursoActivo: true,
+        horasTotales: 5,
+        empleadoId: '0de90fdb-b2ee-4885-a490-5e641c7e695a',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '2d033528-5602-491e-88b0-2d5af5864a40',
+        nombreCurso: 'Pilates',
+        fechaIni: new Date(),
+        fechaFin: new Date(),
+        fechaFinDeMatricula: new Date(),
+        maxMatriculados: 10,
+        minMatriculados: 5,
+        cursoIniciado: true,
+        cursoActivo: true,
+        horasTotales: 2,
+        empleadoId: 'c2565d02-75ee-4821-bfd4-ff763c542785',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '2d033528-0256-491e-99b0-2d5af5840a40',
+        nombreCurso: 'Salai Fitness',
+        fechaIni: new Date(),
+        fechaFin: new Date(),
+        fechaFinDeMatricula: new Date(),
+        maxMatriculados: 50,
+        minMatriculados: 30,
+        cursoIniciado: false,
+        cursoActivo: true,
+        horasTotales: 8,
+        empleadoId: '0de90fdb-b2ee-4885-a490-5e641c7e695a',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {});
 
     // await queryInterface.bulkInsert('actividades', [
     //   {

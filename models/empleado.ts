@@ -33,15 +33,11 @@ const Empleado = db.define('empleados', {
     defaultValue: 'VENTA_ROL',
   }
 },{
-  // freezeTableName: true,
-  // tableName: 'Employees',
   scopes: {
     withoutPassword: {
       attributes: { exclude: ['password'] }
     }
   }
 });
-
-// db.sync({ alter: true });
 
 export default Empleado;

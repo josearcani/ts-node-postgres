@@ -34,19 +34,8 @@ const Curso = db.define('cursos', {
   horasTotales: {
     type: DataTypes.INTEGER
   },
-  // monitor: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  //   references: {
-  //     model: 'usuarios',
-  //     key: 'id'
-  //   }
-  // },
 },{
   freezeTableName: true,
 });
-
-// db.sync({ alter: true });
-
 
 export default Curso;

@@ -3,9 +3,7 @@ import bcrypt from 'bcryptjs';
 import { Empleado } from '../models';
 
 export const getEmpleados = async( req: Request , res: Response ) => {
-
   const { limit = 10, page = 1 } = req.query;
-
   const offset = (Number(page) - 1) * Number(limit) + 1;
 
   const empleados = await Empleado.scope('withoutPassword').findAndCountAll({
@@ -37,7 +35,6 @@ export const getEmpleado = async( req: Request , res: Response ) => {
 }
 
 export const postEmpleado = async( req: Request , res: Response ) => {
-
   const { nombre, apellido, email, password, rol } = req.body;
 
   try {
@@ -59,8 +56,8 @@ export const postEmpleado = async( req: Request , res: Response ) => {
     const hash = bcrypt.hashSync(password, salt);
 
     empleado.password = hash;
-    // const empleado = new Empleado(body);
     await empleado.save();
+    // const empleado = new Empleado(body);
 
     res.json({
       msg: 'Empleado creado',
@@ -95,7 +92,6 @@ export const putEmpleado = async ( req: Request , res: Response ) => {
     })    
   }   
 }
-
 
 export const deleteEmpleado = async( req: Request , res: Response ) => {
   const { id } = req.params;

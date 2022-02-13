@@ -100,6 +100,56 @@ module.exports = {
       }
     });
 
+    await queryInterface.createTable('cursos', {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUID,
+        primaryKey: true,
+      },
+      nombreCurso: {
+        type: Sequelize.STRING
+      },
+      fechaIni: {
+        type: Sequelize.DATE
+      },
+      fechaFin: {
+        type: Sequelize.DATE
+      },
+      fechaFinDeMatricula: {
+        type: Sequelize.DATE
+      },
+      maxMatriculados: {
+        type: Sequelize.INTEGER
+      },
+      minMatriculados: {
+        type: Sequelize.INTEGER
+      },
+      cursoIniciado: {
+        type: Sequelize.BOOLEAN
+      },
+      cursoActivo: {
+        type: Sequelize.BOOLEAN
+      },
+      horasTotales: {
+        type: Sequelize.INTEGER
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      empleadoId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'empleados',
+          key: 'id'
+        }
+      },
+    });
 
     // await queryInterface.createTable('gimnasios', {
     //   id: {
@@ -112,58 +162,6 @@ module.exports = {
     //     type: Sequelize.STRING
     //   },
     //   usuarioId: {
-    //     type: Sequelize.INTEGER,
-    //     allowNull: false,
-    //     references: {
-    //       model: 'usuarios',
-    //       key: 'id'
-    //     }
-    //   },
-    //   createdAt: {
-    //     allowNull: false,
-    //     type: Sequelize.DATE
-    //   },
-    //   updatedAt: {
-    //     allowNull: false,
-    //     type: Sequelize.DATE
-    //   }
-    // });
-
-    // await queryInterface.createTable('cursos', {
-    //   id: {
-    //     allowNull: false,
-    //     autoIncrement: true,
-    //     primaryKey: true,
-    //     type: Sequelize.INTEGER
-    //   },
-    //   nombreCurso: {
-    //     type: Sequelize.STRING
-    //   },
-    //   fechaIni: {
-    //     type: Sequelize.DATE
-    //   },
-    //   fechaFin: {
-    //     type: Sequelize.DATE
-    //   },
-    //   fechaFinDeMatricula: {
-    //     type: Sequelize.DATE
-    //   },
-    //   maxMatriculados: {
-    //     type: Sequelize.INTEGER
-    //   },
-    //   minMatriculados: {
-    //     type: Sequelize.INTEGER
-    //   },
-    //   cursoIniciado: {
-    //     type: Sequelize.BOOLEAN
-    //   },
-    //   cursoActivo: {
-    //     type: Sequelize.BOOLEAN
-    //   },
-    //   horasTotales: {
-    //     type: Sequelize.INTEGER
-    //   },
-    //   monitor: {
     //     type: Sequelize.INTEGER,
     //     allowNull: false,
     //     references: {
