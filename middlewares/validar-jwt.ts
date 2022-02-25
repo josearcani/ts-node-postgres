@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Cliente, Empleado } from '../models';
 
-
 type Next = () => void | Promise<void>
 //Resquest & { usuario: any }
 export const validarJWT = async (req: Request , res: Response, next:Next) => {

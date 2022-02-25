@@ -29,19 +29,15 @@ const Cliente = db.define('clientes', {
     allowNull: false,
   },
   rol: {
-    type: DataTypes.ENUM('CLIENT_ROL'),
+    type: DataTypes.STRING,
     defaultValue: 'CLIENTE_ROL'
   }
 },{
-  // freezeTableName: true,
-  // tableName: 'Employees',
   scopes: {
     withoutPassword: {
       attributes: { exclude: ['password'] }
     }
   }
 });
-
-// db.sync({ alter: true });
 
 export default Cliente;

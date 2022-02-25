@@ -1,15 +1,23 @@
+import db from '../db/connection';
 // import Actividad from './actividad';
 // import Clase from './clase';
-// import Curso from './curso';
-import Rol from './rol';
-import Empleado from './empleado';
 import Cliente from './cliente';
+import Curso from './curso';
+import Empleado from './empleado';
+import Rol from './rol';
+
+Empleado.hasMany(Curso);
+Curso.belongsTo(Empleado);
+
+(async () => {
+  await db.sync({ alter: true });
+})()
 
 export {
   // Actividad,
   // Clase,
-  // Curso,
-  Rol,
   Cliente,
+  Curso,
   Empleado,
+  Rol,
 }

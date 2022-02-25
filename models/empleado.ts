@@ -29,19 +29,15 @@ const Empleado = db.define('empleados', {
     allowNull: false,
   },
   rol: {
-    type: DataTypes.ENUM('ADMIN_ROL', 'MANAGER_ROL', 'TRAINER_ROL', 'VENTA_ROL'),
-    // defaultValue: 'VENTA_ROL'
+    type: DataTypes.STRING,
+    defaultValue: 'VENTA_ROL',
   }
 },{
-  // freezeTableName: true,
-  // tableName: 'Employees',
   scopes: {
     withoutPassword: {
       attributes: { exclude: ['password'] }
     }
   }
 });
-
-// db.sync({ alter: true });
 
 export default Empleado;

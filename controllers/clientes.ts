@@ -26,7 +26,7 @@ export const getCliente = async( req: Request , res: Response ) => {
   });
   if(!cliente) {
     res.status(404).json({
-      msg: 'No se ha encontrado a un cliente con es id'
+      msg: 'No se ha encontrado a un cliente con ese id'
     });
   } else {
     res.json(cliente);
@@ -74,13 +74,10 @@ export const putCliente = async ( req: Request , res: Response ) => {
   
   try {
     const cliente:any = await Cliente.scope('withoutPassword').findByPk(id);
-    // if (req.usuario?.rol === 'CLIENTE_ROL') {
-    //   console.log('=========ES CLIENTE=========');
-    // }
     await cliente.update({ nombre, apellido });
 
     res.json({
-      msg: 'Actualizado',
+      msg: 'Cliente actualizado',
       cliente
     });
 
@@ -104,7 +101,7 @@ export const deleteCliente = async( req: Request , res: Response ) => {
   if(cliente.id === idDB || rol === 'ADMIN_ROL' || rol === 'MANAGER_ROL') {
     await cliente.update({ estado: false });
     res.json({
-      msg: 'borrado cliente'
+      msg: 'Cliente eliminado'
     });
   } else {
     res.json({

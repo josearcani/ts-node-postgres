@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { check } from 'express-validator';
 import { getCliente, getClientes, postCliente, putCliente, deleteCliente } from '../controllers/clientes';
 import { validarRol, validarJWT, validarCampos } from '../middlewares';
-import { idUsuarioExiste, rolValido } from '../helpers';
+import { idUsuarioExiste } from '../helpers';
 
 const router = Router();
 
