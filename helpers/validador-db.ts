@@ -15,8 +15,7 @@ export const idUsuarioExiste = async (id= '') => {
   const [empleado, cliente] = await Promise.all([
     Empleado.findByPk( id ),
     Cliente.findByPk( id ),
-  ])
-  // const data = await Empleado.findByPk( id );
+  ]);
   if (!empleado && !cliente) {
     throw new Error(`El id ${id} no existe`);
   }

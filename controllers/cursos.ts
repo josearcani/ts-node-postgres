@@ -51,7 +51,7 @@ export const getCurso = async (req:Request, res:Response) => {
     })
   } else {
     res.json({
-      msg: 'un solo curso a detalle',
+      msg: 'Curso a detalle',
       curso
     })
   }
@@ -95,7 +95,7 @@ export const postCurso = async (req:Request, res:Response) => {
     if (!monitorDB) {
       return res.status(400).json({
         msg: 'El instructor no es válido'
-      })
+      });
     }
 
     const curso = await Curso.create({
@@ -115,12 +115,12 @@ export const postCurso = async (req:Request, res:Response) => {
     
     res.json({
       msg: 'Curso creado',
-      curso
+      curso,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      msg: 'Hable con el administrador'
+      msg: 'Hable con el administrador',
     })
   }
 }
@@ -137,16 +137,14 @@ export const putCurso = async (req:Request, res:Response) => {
 
   res.json({
     msg: 'Curso actualizado - all carefull',
-    curso
+    curso,
   })
 }
 
 export const deleteCurso = async (req:Request, res:Response) => {
   const { id } = req.params;
-
   const curso:any = await Curso.findByPk(id);
-  await curso.update({ cursoActivo: false })
-
+  await curso.update({ cursoActivo: false });
   res.json({
     msg: 'Curso eliminado - estado false',
   })

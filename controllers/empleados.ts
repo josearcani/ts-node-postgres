@@ -18,7 +18,6 @@ export const getEmpleados = async( req: Request , res: Response ) => {
 
 export const getEmpleado = async( req: Request , res: Response ) => {
   const { id } = req.params;
-
   const empleado = await Empleado.scope('withoutPassword').findOne({
     where: {
       id,
@@ -36,14 +35,12 @@ export const getEmpleado = async( req: Request , res: Response ) => {
 
 export const postEmpleado = async( req: Request , res: Response ) => {
   const { nombre, apellido, email, password, rol } = req.body;
-
   try {
     const existeEmail = await Empleado.scope('withoutPassword').findOne({
       where: {
         email
       }
     });
-
     if (existeEmail) {
       return res.status(400).json({
         msg: 'Ya existe un empleado con el correo ' + email
@@ -51,13 +48,11 @@ export const postEmpleado = async( req: Request , res: Response ) => {
     }
 
     const empleado:any = await Empleado.create({ nombre, apellido, email, password, rol });
-
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
     empleado.password = hash;
     await empleado.save();
-    // const empleado = new Empleado(body);
 
     res.json({
       msg: 'Empleado creado',
@@ -73,18 +68,14 @@ export const postEmpleado = async( req: Request , res: Response ) => {
 
 export const putEmpleado = async ( req: Request , res: Response ) => {
   const { id }   = req.params;
-  // only updates nombre and apellido
   const { email, password, rol, estado, ...data } = req.body;
-  
   try {
     const empleado:any = await Empleado.scope('withoutPassword').findByPk(id);
     await empleado.update(data);
-
     res.json({
       msg: 'Actualizado',
       empleado
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -95,12 +86,10 @@ export const putEmpleado = async ( req: Request , res: Response ) => {
 
 export const deleteEmpleado = async( req: Request , res: Response ) => {
   const { id } = req.params;
-
   const empleado:any = await Empleado.scope('withoutPassword').findByPk( id );
-
   await empleado.update({ estado: false });
   // await empleado.destroy();
   res.json({
-    msg: 'borrado'
+    msg: 'Empleado eliminado'
   });
 }

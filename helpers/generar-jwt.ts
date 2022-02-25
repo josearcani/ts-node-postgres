@@ -16,7 +16,3 @@ export const generarJWT = (email: '') => {
     })
   })
 }
-
-// module.exports = {
-//   generarJWT,
-// }

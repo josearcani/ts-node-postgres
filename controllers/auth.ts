@@ -10,7 +10,8 @@ export const login = async (req: Request, res: Response) => {
   try {
 
     let usuario:any;
-    console.log('the user is employee', isEmployee)
+    console.log('====================');
+    console.log('the user is employee', isEmployee);
     if (isEmployee) {
       usuario  = await Empleado.findOne({ where: { email } });
     } else {
@@ -42,7 +43,7 @@ export const login = async (req: Request, res: Response) => {
     const { password: notSEND , ...data } = usuario.dataValues; 
 
     res.json({
-      msg: 'login',
+      msg: 'login sucess',
       token,
       usuario: data
     });
@@ -56,6 +57,6 @@ export const login = async (req: Request, res: Response) => {
 
 export const googleSignIn = (req: Request, res: Response) => {
   res.json({
-    msg: 'login con post'
+    msg: 'login con google'
   })
 }
