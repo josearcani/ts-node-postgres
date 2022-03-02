@@ -32,6 +32,8 @@ router.post('/', [
 ], postEmpleado );
 
 router.put('/:id', [
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MANAGER_ROL'),
   check('id', 'Debe contener un id').notEmpty(),
   check('id', 'No es un id válido').isUUID(),
   check('id').custom(idUsuarioExiste),
