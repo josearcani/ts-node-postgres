@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { getCliente, getClientes, postCliente, putCliente, deleteCliente } from '../controllers/clientes';
+import { getCliente, getClientes, postCliente, putCliente, deleteCliente, getCursosCliente } from '../controllers/clientes';
 import { validarRol, validarJWT, validarCampos } from '../middlewares';
 import { idUsuarioExiste } from '../helpers';
 
@@ -47,5 +47,13 @@ router.delete('/:id', [
   check('id').custom(idUsuarioExiste),
   validarCampos
 ],deleteCliente );
+
+router.get('/:username/cursos', [
+  validarJWT,
+  validarRol('ADMIN_ROL', 'MANAGER_ROL', 'TRAINER_ROL','CLIENTE_ROL'),
+  check('username', 'Debe contener un nombre').notEmpty(),
+  check('username', 'No es un id válido').isString(),
+  validarCampos
+], getCursosCliente );
 
 export default router;

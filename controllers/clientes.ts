@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { Cliente } from '../models';
+import { Cliente, Curso } from '../models';
 
 export const getClientes = async( req: Request , res: Response ) => {
   const { limit = 10, page = 1 } = req.query;
@@ -108,4 +108,27 @@ export const deleteCliente = async( req: Request , res: Response ) => {
       msg: 'No es posible realizar esta operación'
     });
   }
+}
+
+export const getCursosCliente = async( req: Request , res: Response ) => {
+  const { username } = req.params;
+  const email = req.usuario?.email;
+
+  const cliente = await Cliente.findAll({
+    where: {
+      email
+    },
+    include: [
+      {
+        model: Curso,
+        attributes: ['id', 'nombreCurso', 'fechaIni', 'fechaFin', 'cursoIniciado' ]
+      }
+    ],
+    attributes: ['id', 'nombre', 'apellido'],
+  });
+
+  res.json({
+    msg: 'Cursos del cliente',
+    cliente
+  });
 }
