@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { getCursos, getCurso, postCurso, putCurso, deleteCurso } from '../controllers/cursos';
+import { getCursos, getCurso, postCurso, putCurso, deleteCurso, postCursoCliente } from '../controllers/cursos';
 import { validarRol, validarJWT, validarCampos } from '../middlewares';
 import { idCursoExiste, isDate } from '../helpers';
 const router = Router();
@@ -51,5 +51,13 @@ router.delete('/:id',[
   check('id').custom(idCursoExiste),
   validarCampos
 ], deleteCurso);
+
+router.post('/inscribirse/:id',[
+  validarJWT,
+  validarRol('CLIENTE_ROL'),
+  check('id', 'Debe contener un id').notEmpty(),
+  check('id', 'No es un id válido').isUUID(),
+  validarCampos
+], postCursoCliente);
 
 export default router;

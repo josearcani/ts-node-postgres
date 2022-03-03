@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Empleado, Curso} from '../models';
+import { Empleado, Curso, CursoCliente } from '../models';
 
 export const getCursos = async (req:Request, res:Response) => {
 
@@ -148,4 +148,47 @@ export const deleteCurso = async (req:Request, res:Response) => {
   res.json({
     msg: 'Curso eliminado - estado false',
   })
+}
+
+export const postCursoCliente = async (req:Request, res:Response) => {
+  const { id } = req.params;
+  const usuario = req.usuario;
+  try {
+    const curso:any = await Curso.findByPk(id);
+    if (!curso) {
+      return res.status(400).json({
+        msg: 'El curso no existe'
+      });
+    }
+
+    const CursoClienteDB = await CursoCliente.findOne({
+      where: {
+        cursoId: curso.id,
+        clienteId: usuario?.id
+      }
+    });
+    console.log(CursoClienteDB);
+    if (CursoClienteDB) {
+      return res.status(400).json({
+        msg: 'Ya estas inscrito a la clase'
+      });
+    }
+
+    const cursoCliente = await CursoCliente.create({
+      cursoId: curso.id,
+      clienteId: usuario?.id
+    });
+    
+    await cursoCliente.save();
+    
+    res.json({
+      msg: 'Inscrito con exito',
+      cursoCliente
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: 'Hable con el administrador',
+    })
+  }
 }

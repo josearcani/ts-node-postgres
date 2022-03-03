@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../db/connection';
 
-const Curso = db.define('cursos', {
+export const Curso = db.define('cursos', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -38,4 +38,13 @@ const Curso = db.define('cursos', {
   freezeTableName: true,
 });
 
-export default Curso;
+export const CursoCliente = db.define('cursoCliente', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true
+  }
+},{
+  freezeTableName: true,
+  timestamps: false
+});
