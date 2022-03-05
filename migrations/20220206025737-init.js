@@ -151,6 +151,20 @@ module.exports = {
       },
     });
 
+    await queryInterface.createTable('cursoCliente', {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUID,
+        primaryKey: true,
+      },
+      cursoId: {
+        type: Sequelize.UUID,
+      },
+      clienteId: {
+        type: Sequelize.UUID,
+      },
+    });
+
     // await queryInterface.createTable('gimnasios', {
     //   id: {
     //     allowNull: false,
