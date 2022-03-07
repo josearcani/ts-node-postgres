@@ -60,3 +60,14 @@ export const googleSignIn = (req: Request, res: Response) => {
     msg: 'login con google'
   })
 }
+
+export const renewJwt = async (req: Request, res: Response) => {
+  const email = req.usuario?.email;
+  //@ts-ignore
+  const token = await generarJWT(email);
+  res.json({
+    msg: 'login sucess',
+    token,
+    usuario: req.usuario
+  });
+}
