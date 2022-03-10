@@ -13,7 +13,7 @@ export const getClientes = async( req: Request , res: Response ) => {
     limit: Number(limit),
     offset: (offset === 1) ? 0 : offset - 1
   });
-  res.json({ clientes });
+  res.json({ data: clientes });
 }
 
 export const getCliente = async( req: Request , res: Response ) => {
@@ -29,7 +29,7 @@ export const getCliente = async( req: Request , res: Response ) => {
       msg: 'No se ha encontrado a un cliente con ese id'
     });
   } else {
-    res.json(cliente);
+    res.json({ data: cliente });
   }
 }
 
@@ -57,7 +57,7 @@ export const postCliente = async( req: Request , res: Response ) => {
 
     res.json({
       msg: 'Cliente creado',
-      cliente,
+      data: cliente,
     });
   } catch (error) {
     console.log(error);
@@ -78,7 +78,7 @@ export const putCliente = async ( req: Request , res: Response ) => {
 
     res.json({
       msg: 'Cliente actualizado',
-      cliente
+      data: cliente
     });
 
   } catch (error) {
@@ -129,6 +129,6 @@ export const getCursosCliente = async( req: Request , res: Response ) => {
 
   res.json({
     msg: 'Cursos del cliente',
-    cliente
+    data: cliente
   });
 }

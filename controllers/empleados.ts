@@ -13,7 +13,7 @@ export const getEmpleados = async( req: Request , res: Response ) => {
     limit: Number(limit),
     offset: (offset === 1) ? 0 : offset - 1
   });
-  res.json({ empleados });
+  res.json({ data: empleados });
 }
 
 export const getEmpleado = async( req: Request , res: Response ) => {
@@ -29,7 +29,7 @@ export const getEmpleado = async( req: Request , res: Response ) => {
       msg: 'No se ha encontrado a un empleado con es id'
     });
   } else {
-    res.json(empleado);
+    res.json({ data:empleado });
   }
 }
 
@@ -56,7 +56,7 @@ export const postEmpleado = async( req: Request , res: Response ) => {
 
     res.json({
       msg: 'Empleado creado',
-      empleado,
+      data: empleado,
     });
   } catch (error) {
     console.log(error);
@@ -74,7 +74,7 @@ export const putEmpleado = async ( req: Request , res: Response ) => {
     await empleado.update(data);
     res.json({
       msg: 'Actualizado',
-      empleado
+      data: empleado
     });
   } catch (error) {
     console.log(error);

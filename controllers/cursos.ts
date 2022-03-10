@@ -24,7 +24,7 @@ export const getCursos = async (req:Request, res:Response) => {
 
   res.json({
     msg: 'Todos los cursos disponibles',
-    cursos
+    data: cursos
   })
 }
 
@@ -52,7 +52,7 @@ export const getCurso = async (req:Request, res:Response) => {
   } else {
     res.json({
       msg: 'Curso a detalle',
-      curso
+      data: curso
     })
   }
 }
@@ -115,7 +115,7 @@ export const postCurso = async (req:Request, res:Response) => {
     
     res.json({
       msg: 'Curso creado',
-      curso,
+      data: curso,
     });
   } catch (error) {
     console.log(error);
@@ -137,7 +137,7 @@ export const putCurso = async (req:Request, res:Response) => {
 
   res.json({
     msg: 'Curso actualizado - all carefull',
-    curso,
+    data: curso,
   })
 }
 
@@ -183,7 +183,7 @@ export const postCursoCliente = async (req:Request, res:Response) => {
     
     res.json({
       msg: 'Inscrito con exito',
-      cursoCliente
+      data: cursoCliente
     })
   } catch (error) {
     console.log(error);
