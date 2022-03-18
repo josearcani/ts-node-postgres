@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { Cliente, Curso } from '../models';
+import { generarJWT } from '../helpers';
 
 export const getClientes = async( req: Request , res: Response ) => {
   const { limit = 10, page = 1 } = req.query;
@@ -48,16 +49,20 @@ export const postCliente = async( req: Request , res: Response ) => {
       });
     }
     const cliente:any = await Cliente.create({ nombre, apellido, email, password });
-
+    
+    const token = await generarJWT(cliente.email);
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
     cliente.password = hash;
     await cliente.save();
 
+    const { password: pass, ...data } = cliente.dataValues;
+
     res.json({
-      msg: 'Cliente creado',
-      data: cliente,
+      msg: 'Cliente registrado',
+      token,
+      data,
     });
   } catch (error) {
     console.log(error);
