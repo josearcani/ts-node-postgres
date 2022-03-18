@@ -21,8 +21,8 @@ router.get('/:id', [
 ], getCliente );
 
 router.post('/', [
-  validarJWT,
-  validarRol('ADMIN_ROL', 'MANAGER_ROL'),
+  // validarJWT,
+  // validarRol('ADMIN_ROL', 'MANAGER_ROL'),
   check('nombre', 'Debe de tener nombre').notEmpty(),
   check('apellido', 'Debe de tener apellido').notEmpty(),
   check('email', 'Debe ser un correo válido').isEmail(),
