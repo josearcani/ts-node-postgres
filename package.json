@@ -6,13 +6,13 @@
   "scripts": {
     "make-model": "npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string",
     "make-seed": "npx sequelize-cli seed:generate --name demo-user",
-    "migrate": "npx sequelize-cli db:migrate",
+    "migrate": "npx sequelize-cli db:migrate --env production",
     "seed": "npx sequelize-cli db:seed:all",
     "down": "npx sequelize-cli db:migrate:undo",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
-    "start": "npm run migrate && npm run seed && node ./dist/app.js"
+    "start": "npm run migrate && node ./dist/app.js"
   },
   "keywords": [],
   "author": "",
