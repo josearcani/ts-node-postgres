@@ -10,7 +10,9 @@
     "seed": "npx sequelize-cli db:seed:all",
     "down": "npx sequelize-cli db:migrate:undo",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./dist/app.js"
+    "tsc": "tsc",
+    "postinstall": "npm run tsc",
+    "start": "npm migrate && npm seed && node ./dist/app.js"
   },
   "keywords": [],
   "author": "",
