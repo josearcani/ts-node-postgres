@@ -3,16 +3,29 @@ import bcrypt from 'bcryptjs';
 import { Empleado } from '../models';
 
 export const getEmpleados = async( req: Request , res: Response ) => {
-  const { limit = 10, page = 1 } = req.query;
+  const { limit = 10, page = 1, rol='' } = req.query;
   const offset = (Number(page) - 1) * Number(limit) + 1;
 
-  const empleados = await Empleado.scope('withoutPassword').findAndCountAll({
-    where: {
-      estado: true
-    },
-    limit: Number(limit),
-    offset: (offset === 1) ? 0 : offset - 1
-  });
+  let empleados: Object;
+
+  if (rol.length === 0) {
+    empleados = await Empleado.scope('withoutPassword').findAndCountAll({
+      where: {
+        estado: true,
+      },
+      limit: Number(limit),
+      offset: (offset === 1) ? 0 : offset - 1
+    });
+  } else {
+    empleados = await Empleado.scope('withoutPassword').findAndCountAll({
+      where: {
+        estado: true,
+        rol
+      },
+      limit: Number(limit),
+      offset: (offset === 1) ? 0 : offset - 1
+    });
+  }
   res.json({ data: empleados });
 }
 
