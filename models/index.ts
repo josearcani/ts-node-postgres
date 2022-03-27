@@ -12,9 +12,9 @@ Curso.belongsTo(Empleado);
 Curso.belongsToMany(Cliente, { through: "cursoCliente" });
 Cliente.belongsToMany(Curso, { through: "cursoCliente" });
 
-(async () => {
-  await db.sync({ alter: true });
-})()
+// (async () => {
+//   await db.sync({ alter: true });
+// })()
 
 export {
   // Actividad,

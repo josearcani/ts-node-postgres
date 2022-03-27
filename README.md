@@ -84,3 +84,45 @@ tslint.json
 
 `tsc --watch`
 `nodemon dist/app.js`
+
+
+# Heroku deploy
+
+
+package.json
+```json
+  "make-seed": "npx sequelize-cli seed:generate --name demo-user",
+  "migrate": "npx sequelize-cli db:migrate --env production",
+  "seed": "npx sequelize-cli db:seed:all",
+  "down": "npx sequelize-cli db:migrate:undo",
+  "tsc": "tsc",
+  "postinstall": "npm run tsc",
+  "start": "node ./dist/app.js"
+```
+## "tsc"
+Install TypeScript on heroku (automatic)
+```
+"tsc": "tsc"
+```
+## "postinstall"
+Compiles TS code into JS into `./dist` directory (automatic)
+```
+"postinstall": "npm run tsc"
+```
+
+## Procfile
+release runs migrations (automatic)
+
+```
+release: npx sequelize-cli db:migrate
+worker: node dist/app.js
+```
+
+## Another way
+One can run migrations from the console
+```bash
+git push heroku deploy:main
+
+heroku run npm run migrate
+heroku run npm run seed
+```
