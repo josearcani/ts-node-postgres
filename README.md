@@ -1,6 +1,50 @@
-# TypeScript Restserver + postgres
+# Management system | PERN-TypeScript
 
-## How to start
+Management system
+
+## Demo
+
+[Deployed on Heroku](https://posgress-jarh.herokuapp.com/)
+
+### Frontend
+
+- ReactJS - Frontend library
+- React Router DOM
+
+### Backend
+
+- Node.js - Runtime environment for JS
+- Express.js - Node.js framework, makes process of building APIs easier & faster
+- PostgreSQL - Opens-source SQL database to store data
+- Sequelize - TS-based ORM for mostly SQL-based databases
+- JSON Web Token - A standard to secure/authenticate HTTP requests
+- Bcrypt.js - For hashing passwords
+- Dotenv - To load environment variables from a .env file
+
+## Features
+
+- Authentication (login/register with email & password)
+- CRUD employees and clients with ability to choose roles
+- CRUD courses, with title, description, number of students
+- Admin and Manager members can add, remove courses and clients
+
+## Screenshots
+
+#### Admin
+
+![Admin-1](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/admin1.jpg)
+![Admin-2](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/admin2.jpg)
+![Admin-3](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/admin3.jpg)
+![Admin-4](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/admin4.jpg)
+![Admin-5](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/admin5.jpg)
+
+#### Client
+
+![Client-1](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/client1.jpg)
+![Client-2](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/client2.jpg)
+![Client-3](https://github.com/josearcani/ts-node-postgres/blob/main/screenshots/client3.jpg)
+
+## How to use
 
 Install all dependencies
 ```
