@@ -33,16 +33,16 @@ Management system
 #### Admin
 
 ![Admin-1](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin1.png)
-![Admin-2](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin2.jpg)
-![Admin-3](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin3.jpg)
-![Admin-4](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin4.jpg)
-![Admin-5](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin5.jpg)
+![Admin-2](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin2.png)
+![Admin-3](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin3.png)
+![Admin-4](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin4.png)
+![Admin-5](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/admin5.png)
 
 #### Client
 
-![Client-1](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/client1.jpg)
-![Client-2](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/client2.jpg)
-![Client-3](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/client3.jpg)
+![Client-1](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/client1.png)
+![Client-2](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/client2.png)
+![Client-3](https://raw.githubusercontent.com/josearcani/ts-node-postgres/main/screenshots/client3.png)
 
 ## How to use
 
